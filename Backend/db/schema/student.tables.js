@@ -7,8 +7,6 @@ const createStudentTable = async () => {
     user_id INT UNIQUE NOT NULL,
     parent_email VARCHAR(100),
     rfid_tag VARCHAR(50) UNIQUE, 
-    grade_level VARCHAR(20),
-    section VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
     );

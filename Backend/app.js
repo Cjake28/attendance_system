@@ -1,7 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import {errorHandler} from './middleware/errorHandler.js'
 import cookieParser from 'cookie-parser';
+import {userRoutes} from './routes/user.route.js'
 
 dotenv.config();
 
@@ -24,5 +26,9 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use('/api',userRoutes);
+
+app.use(errorHandler);
 
 
