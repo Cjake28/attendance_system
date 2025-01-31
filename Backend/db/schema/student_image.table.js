@@ -4,11 +4,12 @@ const createStudent_imageTable = async () => {
   const query = `
     CREATE TABLE IF NOT EXISTS student_images (
     image_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
+    user_id INT NOT NULL,  -- Link directly to user_id
     image LONGBLOB NOT NULL,
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
-    );
+    FOREIGN KEY (user_id) REFERENCES students(user_id) ON DELETE CASCADE
+  );
+
   `;
   
   try {
