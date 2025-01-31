@@ -18,14 +18,22 @@ export const createStudentUsr = async (name, username, password, role) => {
     }
 };
 
-const createStudentData = async(user_id, parent_email, rfid_tag) =>{
+export const createStudentData = async (user_id, parent_email, rfid_tag) => {
     const query = `
-        INSERT INTO users (user_id, parent_email, rfid_tag)
+        INSERT INTO students (user_id, parent_email, rfid_tag)
         VALUES (?, ?, ?);
     `;
 
     const values = [user_id, parent_email, rfid_tag];
-}
+
+    try {
+        await db.execute(query, values);
+        return { success: true, user_id };
+    } catch (error) {
+        console.error("❌ Database Error:", error.message);
+        throw new AppError("Failed to create student data. Please try again later.", 500);
+    }
+};
 
 // ✅ Check if a username already exists
 export const isUsernameTaken = async (username) => {
@@ -42,7 +50,7 @@ export const isUsernameTaken = async (username) => {
 
 // ✅ Check if a rfid already exists
 export const isRfidTaken = async(rfid_tag) =>{
-    const query = `SELECT COUNT(*) AS count FROM users WHERE rfid = ?`; 
+    const query = `SELECT COUNT(*) AS count FROM students WHERE rfid_tag = ?`; 
     
     try {
         const [rows] = await db.execute(query, [rfid]);
