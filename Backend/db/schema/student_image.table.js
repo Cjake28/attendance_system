@@ -10,7 +10,7 @@ const createStudent_imageTable = async () => {
     FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
     );
   `;
-
+  
   try {
     await db.query(query);
     console.log("✅ student images table created successfully.");
