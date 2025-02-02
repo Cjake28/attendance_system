@@ -1,3 +1,4 @@
+import upload from "../utils/multerConfig.js"; // Import multer setup
 import bcrypt from 'bcrypt';
 import AppError from "../utils/AppError.js";
 import {
@@ -5,12 +6,12 @@ import {
     createStudentUsr, 
     isRfidTaken,
     createStudentData,
-    storeStudentImage  // Function to store images
+    storeStudentImage  
 } from '../model/createStudent.model.js';
 
 export const createStudent = async (req, res, next) => {
     const { name, username, password, role, parent_email, rfid_tag } = req.body;
-    const images = req.files?.images || []; // Expecting multiple images
+    const images = req.files; // Multer will provide the images here
 
     if (!name || !username || !password || !role || !parent_email || !rfid_tag || images.length === 0) {
         throw new AppError("All fields and at least one image are required", 400);
@@ -20,7 +21,7 @@ export const createStudent = async (req, res, next) => {
     const normalizedName = name.toLowerCase();
     const normalizedUsername = username.toLowerCase();
 
-    // Check if the username or RFID is already taken
+    // Check if username or RFID is taken
     if (await isUsernameTaken(username)) { 
         throw new AppError("Username already taken", 400);
     }
@@ -38,7 +39,7 @@ export const createStudent = async (req, res, next) => {
 
     // Store multiple face images
     for (const image of images) {
-        const imageBuffer = image.buffer; // Assuming multer handles image uploads
+        const imageBuffer = image.buffer; 
         await storeStudentImage(user_id, imageBuffer);
     }
 

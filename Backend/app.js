@@ -1,9 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import {errorHandler} from './middleware/errorHandler.js'
+import {errorHandler} from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
-import {userRoutes} from './routes/user.route.js'
+import {userRoutes} from './routes/user.route.js';
+import {createStudentRoutes} from './routes/createStudent.route.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api',userRoutes);
+app.use('/api',createStudentRoutes);
 
 app.use(errorHandler);
 
