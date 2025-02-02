@@ -1,6 +1,7 @@
 import createUsersTable from './users.table.js';
 import createStudentTable from './student.tables.js';
 import createStudent_imageTable from './student_image.table.js';
+import createStudent_logs from './studentLogs.table.js'
 
 const initTables = async () => {
   try {
@@ -9,6 +10,7 @@ const initTables = async () => {
     await createUsersTable();
     await createStudentTable();
     await createStudent_imageTable();
+    await createStudent_logs();
     
     console.log("✅ All tables initialized successfully.");
   } catch (error) {

@@ -4,7 +4,7 @@ import cors from 'cors';
 import {errorHandler} from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import {userRoutes} from './routes/user.route.js';
-import {createStudentRoutes} from './routes/createStudent.route.js';
+import createStudentRoutes from './routes/createStudent.route.js';
 
 dotenv.config();
 

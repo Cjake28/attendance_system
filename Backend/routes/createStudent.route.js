@@ -1,5 +1,5 @@
 import express from "express";
-import { createStudent } from "../controllers/student.controller.js";
+import { createStudent } from "../controller/createStudent.controller.js";
 import upload from "../utils/multerConfig.js"; 
 
 const createStudentRoutes = express.Router();

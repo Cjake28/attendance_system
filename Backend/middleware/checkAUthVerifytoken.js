@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import AppError from "../utils/AppError"; // Ensure correct path
+import AppError from "../utils/AppError.js"; 
 
 export const checkAuth_VerifyToken = (req, res, next) => {
     const token = req.cookies.HimlayanToken;

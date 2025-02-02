@@ -1,4 +1,4 @@
-import db from '../db/db.connect';
+import db from '../db/db.connect.js';
 
 // create student user
 export const createStudentUsr = async (name, username, password, role) => {
@@ -32,6 +32,20 @@ export const createStudentData = async (user_id, parent_email, rfid_tag) => {
     } catch (error) {
         console.error("❌ Database Error:", error.message);
         throw new AppError("Failed to create student data. Please try again later.", 500);
+    }
+};
+
+export const storeStudentImage = async (user_id, imageBuffer) => {
+    const query = `
+        INSERT INTO student_images (student_id, image)
+        VALUES (?, ?);
+    `;
+
+    try {
+        await db.execute(query, [user_id, imageBuffer]);
+    } catch (error) {
+        console.error("❌ Database Error:", error.message);
+        throw new AppError("Failed to store student image. Please try again later.", 500);
     }
 };
 
