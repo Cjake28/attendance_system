@@ -1,4 +1,5 @@
 import db from '../db/db.connect.js';
+import AppError from '../utils/AppError.js';
 
 // create student user
 export const createStudentUsr = async (name, username, password, role) => {
@@ -37,7 +38,7 @@ export const createStudentData = async (user_id, parent_email, rfid_tag) => {
 
 export const storeStudentImage = async (user_id, imageBuffer) => {
     const query = `
-        INSERT INTO student_images (student_id, image)
+        INSERT INTO student_images (user_id, image)
         VALUES (?, ?);
     `;
 
@@ -67,7 +68,7 @@ export const isRfidTaken = async(rfid_tag) =>{
     const query = `SELECT COUNT(*) AS count FROM students WHERE rfid_tag = ?`; 
     
     try {
-        const [rows] = await db.execute(query, [rfid]);
+        const [rows] = await db.execute(query, [rfid_tag]);
         return rows[0].count > 0; // Returns true if rfid exists
     } catch (error) {
         console.error("❌ Database Error:", error.message);

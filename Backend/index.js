@@ -83,3 +83,21 @@ async function detectAndCropFaces(imagePath) {
     });
   }
 })();
+
+
+// for (const image of images) {
+//   const imageBuffer = image.buffer; 
+
+//   // Detect and crop faces
+//   const croppedFaces = await detectFaces(imageBuffer);
+
+//   // Store each cropped face image
+//   for (const croppedFace of croppedFaces) {
+//       await storeStudentImage(user_id, croppedFace);
+//   }
+// }
+
+// // for (const image of images) {
+// //     const imageBuffer = image.buffer; 
+// //     await storeStudentImage(user_id, imageBuffer);
+// // }

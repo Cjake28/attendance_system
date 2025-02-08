@@ -5,7 +5,8 @@ const createStudentTable = async () => {
     CREATE TABLE IF NOT EXISTS students (
     user_id INT PRIMARY KEY,  -- No student_id, just use user_id
     parent_email VARCHAR(100),
-    rfid_tag VARCHAR(50) UNIQUE, 
+    rfid_tag VARCHAR(50) UNIQUE,
+    section VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
   );`

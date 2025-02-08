@@ -15,6 +15,7 @@ const db = mysql.createPool({
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     port: process.env.DB_PORT || 3306, // Default MySQL port
+    timezone: 'Asia/Manila', // 
     waitForConnections: true,
     connectionLimit: 10, // Limit concurrent connections
     queueLimit: 0,

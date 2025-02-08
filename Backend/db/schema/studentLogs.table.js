@@ -6,13 +6,13 @@ const createStudent_logs = async () => {
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     rfid_tag VARCHAR(50) NOT NULL,
-    log_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, -- FIXED
-    loged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    section VARCHAR(50) NOT NULL,
+    log_date DATE NOT NULL DEFAULT (CURRENT_DATE), -- Stores only the date
+    time_in TIME DEFAULT NULL,  -- Stores the time-in
+    time_out TIME DEFAULT NULL, -- Stores the time-out
     UNIQUE (student_id, log_date),
     FOREIGN KEY (student_id) REFERENCES students(user_id) ON DELETE CASCADE
-);
-
-  `;
+);`;
 
   try {
     await db.query(query);

@@ -1,50 +1,73 @@
-import AppError from "../utils/AppError.js";
-import {
-    createStudentLog,
-    isStudentLoged,
-    getAllStudentLogForADay
-} from "../model/studentLogs.model.js";
+import { getStudentData, getLastLog, timeInStudent, timeOutStudent } from '../model/studentLogs.model.js';
+import AppError from '../utils/AppError.js';
 
-// ✅ Create a student log
-export const createStudentLogController = async (req, res, next) => {
-    const { student_id, rfid_tag } = req.body;
-    
-    if (!student_id || !rfid_tag) {
-        throw new AppError("Student ID and RFID tag are required", 400);
+export const handleStudentLogs = async (req, res) => {
+    const { user_id, log_date, time } = req.body;
+
+    if (!user_id || !log_date || !time) {
+        throw new AppError("Missing required fields (user_id, log_date, time).", 400);
     }
 
-    // Check if the student is already logged today
-    const alreadyLogged = await isStudentLoged(student_id);
-    if (alreadyLogged) {
-        throw new AppError("Student has already logged in today", 400);
+    try {
+        // ✅ Get student data (rfid_tag, section) from students table
+        const student = await getStudentData(user_id);
+        if (!student) {
+            throw new AppError("Student not found.", 404);
+        }
+
+        const { rfid_tag, section } = student;
+
+        // ✅ Get the last log for this student
+        const lastLog = await getLastLog(user_id, log_date);
+        
+        if (!lastLog) {
+            // No record for today, proceed with time-in
+            const result = await timeInStudent(user_id, rfid_tag, section, log_date, time);
+            return res.status(200).json(result);
+        }
+        
+        const { log_id, time_in, time_out } = lastLog;
+
+        // ❌ If the student has already timed in and timed out today, block further logs
+        if (time_in && time_out) {
+            return res.status(400).json({
+                success: false,
+                status: "already_completed",
+                message: "Student has already timed in and out today. Please wait until the next day."
+            });
+        }
+
+        // ❌ Prevent spamming logs by checking time difference
+        const time_diff = getTimeDiffInMinutes(time_in, time);
+        console.log(time_diff)
+        if (time_diff < 3) {
+            return res.status(200).json({
+                success: false,
+                status: "already_timed_in",
+                message: "Please wait before tapping again."
+            });
+        }
+
+        // ✅ If only time_in exists but no time_out, proceed with time-out
+        if (!time_out) {
+            const result = await timeOutStudent(log_id, time);
+            return res.status(200).json(result);
+        }
+
+    } catch (error) {
+        console.error("Error handling student tap:", error);
+        throw new AppError("Internal Server Error.", 500);
     }
-
-    // Log the student
-    await createStudentLog(student_id, rfid_tag);
-
-    res.status(201).json({ success: true, message: "Student log created successfully" });
 };
 
-// ✅ Check if a student has already logged today
-export const isStudentLogedController = async (req, res, next) => {
-    const { student_id } = req.params;
+function getTimeDiffInMinutes(time1, time2) {
+    const now = new Date();  // Get current date
+    const [h1, m1, s1] = time1.split(":").map(Number);
+    const [h2, m2, s2] = time2.split(":").map(Number);
 
-    if (!student_id) {
-        throw new AppError("Student ID is required", 400);
-    }
+    const date1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h1, m1, s1);
+    const date2 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h2, m2, s2);
 
-    const alreadyLogged = await isStudentLoged(student_id);
-    res.status(200).json({ success: true, logged: alreadyLogged });
-};
-
-// ✅ Get all logs for a specific day
-export const getAllStudentLogForADayController = async (req, res, next) => {
-    const { date } = req.params;
-
-    if (!date) {
-        throw new AppError("Date is required", 400);
-    }
-
-    const logs = await getAllStudentLogForADay(date);
-res.status(200).json({success:true, logs});
-};
+    const diffMs = Math.abs(date2 - date1);
+    return Math.floor(diffMs / 60000);
+}

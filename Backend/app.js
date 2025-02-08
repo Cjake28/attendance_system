@@ -5,7 +5,7 @@ import {errorHandler} from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import {userRoutes} from './routes/user.route.js';
 import createStudentRoutes from './routes/createStudent.route.js';
-
+import studentLogs from './routes/studentLogs.route.js'
 dotenv.config();
 
 export const app = express();
@@ -30,6 +30,7 @@ app.use(cookieParser());
 
 app.use('/api',userRoutes);
 app.use('/api',createStudentRoutes);
+app.use('/api', studentLogs)
 
 app.use(errorHandler);
 

@@ -5,7 +5,7 @@ import AppError from "../utils/AppError.js";
 export const createAdminOrTeacher = async (req, res, next) => {
     let { name, username, password, role } = req.body;
 
-    if (!name || !username || !password || !role) {
+    if(!name || !username || !password || !role) {
         throw new AppError("All fields are required", 400);
     }
 
