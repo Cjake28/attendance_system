@@ -1,11 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import {errorHandler} from './middleware/errorHandler.js';
 import cookieParser from 'cookie-parser';
+
+import {errorHandler} from './middleware/errorHandler.js';
+
 import {userRoutes} from './routes/user.route.js';
 import createStudentRoutes from './routes/createStudent.route.js';
 import studentLogs from './routes/studentLogs.route.js'
+import authRoutes from './routes/auth.route.js'
 dotenv.config();
 
 export const app = express();
@@ -30,7 +33,8 @@ app.use(cookieParser());
 
 app.use('/api',userRoutes);
 app.use('/api',createStudentRoutes);
-app.use('/api', studentLogs)
+app.use('/api', studentLogs);
+app.use('/api', authRoutes)
 
 app.use(errorHandler);
 
