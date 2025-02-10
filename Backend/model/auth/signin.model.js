@@ -19,7 +19,7 @@ export async function getUserName_by_Email(username){
 export const get_id_name_role_Byusername = async(username) =>{
     try{
         const [result] = await db.query(`
-            SELECT id, name, role 
+            SELECT user_id, name, role 
             FROM users 
             WHERE username = ?
         `,[username]);

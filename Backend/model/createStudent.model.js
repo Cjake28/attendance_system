@@ -60,7 +60,7 @@ export const isUsernameTaken = async (username) => {
     } catch (error) {
         console.error("❌ Database Error:", error.message);
         throw new AppError("Failed to check username availability.", 500);
-    }
+    }  
 };
 
 // ✅ Check if a rfid already exists

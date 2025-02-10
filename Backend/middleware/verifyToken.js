@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import AppError from "../utils/AppError.js";
 export const verifyToken = (req, res, next) => {
-	const token = req.cookies.HimlayanToken;
+	const token = req.cookies.AtendanceSys;
 	 
 	if (!token){
 		return res.status(401).json({ success: false, message: "Unauthorized - no token provided" });

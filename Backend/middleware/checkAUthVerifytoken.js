@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import AppError from "../utils/AppError.js"; 
 
 export const checkAuth_VerifyToken = (req, res, next) => {
-    const token = req.cookies.HimlayanToken;
+    const token = req.cookies.AtendanceSys;
 
     if (!token) {
         console.log("🔴 checkAuth: No token");

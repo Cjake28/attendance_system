@@ -1,7 +1,0 @@
-4 lorawan module
-3 esp32
-1 rpi
-3 18650 battery
-3 flow sensor
-3 water level sensor
-

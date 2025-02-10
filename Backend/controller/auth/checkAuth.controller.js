@@ -4,7 +4,7 @@ export const checkAuth = async (req, res) => {
 
 	try {
 		const userId = req.userId;
-
+		console.log("checkAuth")
 		if (!userId) {
 			return res.status(400).json({ success: false, message: "User ID not provided" });
 		}
@@ -14,19 +14,19 @@ export const checkAuth = async (req, res) => {
 		if (!userDetails || userDetails.length === 0) {
 			return res.status(400).json({ success: false, message: "User not found" });
 		}
-
-		const isverified = userDetails[0]?.isVerified;
+		
+		const isverified = userDetails[0]?.is_verified;
 
 		if(!isverified){
 			return res.status(403).json({ success: false, message: "User not verified" });
 		}
-
+		
 		const user = {
-			userId: userDetails[0]?.id,
+			userId: userDetails[0]?.user_id,
 			name: userDetails[0]?.name,
 			role: userDetails[0]?.role
 		};
-
+		console.log("checkAUth User:", user);
 		// Send response with user details
 		res.status(200).json({ success: true, user });
 	} catch (error) {

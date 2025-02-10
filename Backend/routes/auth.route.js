@@ -6,9 +6,9 @@ import {signout} from '../controller/auth/signout.controller.js';
 import {checkAuth_VerifyToken} from '../middleware/checkAUthVerifytoken.js'
 const authRoutes = express.Router();
 
-authRoutes.post("/signin",signin);
+authRoutes.post("/auth/signin",signin);
 
-authRoutes.get("/check-auth", checkAuth_VerifyToken, checkAuth);
-authRoutes.post("/signout", verifyToken, signout);
+authRoutes.get("/auth/check-auth", checkAuth_VerifyToken, checkAuth);
+authRoutes.post("/auth/signout", verifyToken, signout);
 
 export default authRoutes;

@@ -7,9 +7,9 @@ export default function generateTokenAndSetCookie (res, userPayload) {
         } 
     );
 
-    res.cookie("HimlayanToken", token, {
+    res.cookie("AtendanceSys", token, {
         httpOnly: true,
-        secure:true,
+        secure:false,
         sameSite: "None",
         // domain: 'cemetery-mapping-system.onrender.com' 
     });
