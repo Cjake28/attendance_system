@@ -15,10 +15,10 @@
     "@mui/icons-material": "^6.4.3",
     "@mui/material": "^6.4.3",
     "@mui/styled-engine-sc": "^6.4.3",
+    "@tanstack/react-query": "^5.66.0",
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-login-page": "^1.0.4",
     "react-router-dom": "^7.1.5",
     "react-webcam": "^7.2.0",
     "styled-components": "^6.1.15"

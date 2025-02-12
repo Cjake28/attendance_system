@@ -9,7 +9,7 @@ export default function generateTokenAndSetCookie (res, userPayload) {
 
     res.cookie("AtendanceSys", token, {
         httpOnly: true,
-        secure:false,
+        secure:true,
         sameSite: "None",
         // domain: 'cemetery-mapping-system.onrender.com' 
     });

@@ -3,8 +3,8 @@ import AppError from "../utils/AppError.js";
 
 export const checkAuth_VerifyToken = (req, res, next) => {
     const token = req.cookies.AtendanceSys;
-
-    if (!token) {
+    console.log(req.cookies);
+    if (!token) {   
         console.log("🔴 checkAuth: No token");
         throw new AppError("No token", 401); // Automatically caught by Express 5
     }

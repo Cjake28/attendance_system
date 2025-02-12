@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 
 // Create the Auth Context
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     dispatch({ type: 'START_LOADING' });
     try {
-      const response = await axios.post(`http://localhost:8765/api/auth/signin`, { username: username, password: password });
+      const response = await axios.post(`${API_URL}/api/auth/signin`, { username: username, password: password });
       dispatch({ type: 'LOGIN_SUCCESS', payload: response.data.user });
     } catch(error){
       // console.log("login error: ", error.response?.data?.message );
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
   // Check authentication function
   const checkAuth = async () => {
     try {
-      const response = await axios.get(`http://localhost:8765/api/auth/check-auth`);
+      const response = await axios.get(`${API_URL}/api/auth/check-auth`);
       // console.log("checkAuth: ",response);
 
       if(!response.data.success){
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }) => {
 
   const signout = async () => {
     try{
-      const response = await axios.post(`http://localhost:8765/api/auth/signout`, { withCredentials: true });
+      const response = await axios.post(`${API_URL}/api/auth/signout`, { withCredentials: true });
        dispatch({ type: 'CHECK_AUTH_FAILURE' });
       console.log(response);
     }catch(error){

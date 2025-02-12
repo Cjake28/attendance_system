@@ -34,10 +34,13 @@ export const signin = async (req, res) =>{
         }
 
         const get_id_name_roleByusername = await get_id_name_role_Byusername(username);
+
         const userId = get_id_name_roleByusername[0]?.user_id;
         const name = get_id_name_roleByusername[0]?.name;
         const role = get_id_name_roleByusername[0]?.role;
+        
         const userPayload = { userId: userId, name: name, role: role};
+
         console.log("userPayload: ", userPayload);
 
         generateTokenAndSetCookie(res,userPayload);

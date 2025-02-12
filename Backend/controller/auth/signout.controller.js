@@ -1,6 +1,6 @@
 
 export async function signout(req, res){
-	res.cookie("HimlayanToken", "", {
+	res.cookie("AtendanceSys", "", {
         httpOnly: true,
         secure:true,
         sameSite: "None",

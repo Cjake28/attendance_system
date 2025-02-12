@@ -9,7 +9,7 @@ const createStudent_imageTable = async () => {
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES students(user_id) ON DELETE CASCADE
   );
-
+  
   `;
   
   try {

@@ -3,16 +3,15 @@ import db from '../db.connect.js';
 const createStudent_logs = async () => {
   const query = `
     CREATE TABLE IF NOT EXISTS student_logs (
-    log_id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
-    rfid_tag VARCHAR(50) NOT NULL,
-    section VARCHAR(50) NOT NULL,
-    log_date DATE NOT NULL DEFAULT (CURRENT_DATE), -- Stores only the date
-    time_in TIME DEFAULT NULL,  -- Stores the time-in
-    time_out TIME DEFAULT NULL, -- Stores the time-out
-    UNIQUE (student_id, log_date),
-    FOREIGN KEY (student_id) REFERENCES students(user_id) ON DELETE CASCADE
-);`;
+  log_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,  -- Keep user_id but no FK
+  rfid_tag VARCHAR(50) NOT NULL,
+  section VARCHAR(50) NOT NULL,
+  log_date DATE NOT NULL DEFAULT (CURRENT_DATE),
+  time_in TIME DEFAULT NULL,
+  time_out TIME DEFAULT NULL,
+  UNIQUE (user_id, log_date)  -- Ensures one log per user per day
+  );`;
 
   try {
     await db.query(query);
