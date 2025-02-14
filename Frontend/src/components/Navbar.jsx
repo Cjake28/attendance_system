@@ -46,6 +46,13 @@ const Navbar = () => {
               >
                 Manage Users
               </Button>
+              <Button
+                component={Link}
+                to="/admin/attendance"
+                sx={{ color: isActive("/admin/attendance") ? "yellow" : "white" }}
+              >
+                Attendace
+              </Button>
             </>
           )}
           {role === "teacher" && (

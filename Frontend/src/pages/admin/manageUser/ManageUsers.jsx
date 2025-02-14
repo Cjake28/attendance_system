@@ -1,5 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { fetchUsers, unverifyUser, deleteUser, verifyUser } from "./userApi.js";
+
 import { 
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, 
   Button, ButtonGroup, TextField, CircularProgress, SpeedDial, SpeedDialAction 
@@ -170,7 +172,7 @@ const ManageUsers = () => {
           mutationFn={() => unverifyUser(selectedUser)}
           title="Unverify User" 
           message="Are you sure you want to unverify this user?" 
-          confirmText="Unverify" 
+          actionText="Unverify" 
           confirmColor="warning"
           onSuccessCallback={() => {
             queryClient.setQueryData(["users"], (oldUsers) => 
@@ -190,7 +192,7 @@ const ManageUsers = () => {
           mutationFn={() => deleteUser(selectedUser)}
           title="Delete User" 
           message="Are you sure you want to delete this user?" 
-          confirmText="Delete" 
+          actionText="Delete" 
           confirmColor="error"
           onSuccessCallback={() => {
             queryClient.setQueryData(["users"], (oldUsers) => 
@@ -208,7 +210,7 @@ const ManageUsers = () => {
           mutationFn={() => verifyUser(selectedUser)}
           title="Verify User" 
           message="Are you sure you want to verify this user?" 
-          confirmText="Verify" 
+          actionText="Verify" 
           confirmColor="success"
           onSuccessCallback={() => {
             queryClient.setQueryData(["users"], (oldUsers) => 

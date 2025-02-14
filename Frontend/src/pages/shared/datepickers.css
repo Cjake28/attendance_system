@@ -1,0 +1,92 @@
+/* .date-picker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+  } */
+  
+  .react-datepicker-wrapper {
+    display: flex;
+    width: 100%;
+    margin-top: auto;
+    height: 100%;
+  }
+
+  .custom-datepicker {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #00ff95 !important;
+    /* padding: 8px !important; */
+    border-radius: 5px !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    /* flex-grow: 1 !important; */
+  }
+  
+  .react-datepicker {
+    background-color: #1e1e1e !important;
+    border: 1px solid #00ff95 !important;
+  }
+  
+  .react-datepicker__header {
+    background-color: #121212 !important;
+    border-bottom: 1px solid #00ff95 !important;
+  }
+  
+  .react-datepicker__current-month,
+  .react-datepicker-time__header,
+  .react-datepicker-year-header {
+    color: #00ff95 !important;
+  }
+  
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    color: #ffffff !important;
+  }
+  
+  .react-datepicker__day:hover,
+  .react-datepicker__day--selected {
+    background-color: #00ff95 !important;
+    color: #121212 !important;
+  }
+  
+  .react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown {
+  background-color: #1e1e1e !important;
+  border: 1px solid #00ff95 !important;
+  color: #ffffff !important;
+}
+
+.react-datepicker__year-option {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  padding: 5px !important;
+}
+
+.react-datepicker__year-option:hover {
+  background-color: #00ff95 !important;
+  color: #121212 !important;
+}
+
+.react-datepicker__year-option--selected {
+  background-color: #00ff95 !important;
+  color: #121212 !important;
+  font-weight: bold !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: #ffffff !important; /* Change to white or any light color */
+}
+
+
+.react-datepicker__year-read-view--selected-year {
+  color: #ffffff !important; /* Ensures the selected year text is white */
+}
+

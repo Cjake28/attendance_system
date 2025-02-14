@@ -6,6 +6,7 @@ const createStudent_logs = async () => {
   log_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,  -- Keep user_id but no FK
   rfid_tag VARCHAR(50) NOT NULL,
+  name VARCHAR(100) NOT NULL,
   section VARCHAR(50) NOT NULL,
   log_date DATE NOT NULL DEFAULT (CURRENT_DATE),
   time_in TIME DEFAULT NULL,

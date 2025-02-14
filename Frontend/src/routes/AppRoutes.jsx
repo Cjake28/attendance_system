@@ -20,6 +20,10 @@ import NotFound from "../pages/NotpoundPage.jsx";
 import ManageUsers from '../pages/admin/manageUser/ManageUsers.jsx'
 import Dashboard from '../pages/admin/dashboard/Dashboard.jsx'
 
+
+//shared pages
+import AttendacePage from '../pages/shared/attendance.Page.jsx'
+
 const router = createBrowserRouter([
   // Auth Routes
   {
@@ -55,6 +59,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Dashboard /> }, // Fixed index
           { path: "manage-users", element: <ManageUsers /> }, // Fixed path
+          {path: "attendance", element: <AttendacePage/>}
         ],
       },
       {
