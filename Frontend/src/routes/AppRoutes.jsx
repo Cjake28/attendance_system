@@ -20,6 +20,11 @@ import NotFound from "../pages/NotpoundPage.jsx";
 import ManageUsers from '../pages/admin/manageUser/ManageUsers.jsx'
 import Dashboard from '../pages/admin/dashboard/Dashboard.jsx'
 
+// teacher pages
+import TeacherPage from '../pages/teacher/TeacherPage.jsx'
+
+//student pages
+import StudentPage from '../pages/student/StudentPage.jsx'
 
 //shared pages
 import AttendacePage from '../pages/shared/attendance.Page.jsx'
@@ -64,11 +69,17 @@ const router = createBrowserRouter([
       },
       {
         path: "teacher",
-        element: <h1>Teacher Dashboard</h1>,
+        element: <RoleBasedProtection userRole="teacher" />,
+        children: [
+          { index: true, element: <TeacherPage /> }, // Fixed index
+        ],
       },
       {
         path: "student",
-        element: <h1>Student Dashboard</h1>,
+        element: <RoleBasedProtection userRole="student" />,
+        children: [
+          { index: true, element: <StudentPage /> }, // Fixed index
+        ],
       },
     ],
   },

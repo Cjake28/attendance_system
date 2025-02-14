@@ -1,7 +1,9 @@
-export default function teacherPage() {
+import AttendanceTable from "../shared/attendance.Page";
+
+export default function TeacherPage() {
     return (
-        <div>
-            <h1>teacherPage Page</h1>
+        <div style={{flex: 1}}>   
+        <AttendanceTable/>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 
 export const convertTOAMPM = (time) => {
-    if(!time) return "";
     const [hourse, minutes] = time.split(":");
     let h = hourse % 12 || 12;  // 12 hour format
     let ampm = hourse < 12 ? "AM" : "PM";

@@ -1,6 +1,6 @@
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
-import {convertTOAMPM, formatDate} from '../../utils/formatDate.js';
+import {convertTOAMPM, formatDate} from './formatDate.js';
 export const exportToExcel = async (data, fileName = "Attendance.xlsx") => {
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Attendance");

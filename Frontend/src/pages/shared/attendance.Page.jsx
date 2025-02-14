@@ -15,18 +15,21 @@ import {
   Button,
   MenuItem,
   CircularProgress,
-  Fab,
-} from "@mui/material";
-import FloatingButton from "../../utils/floatingACtionSave.jsx";
 
+} from "@mui/material";
+
+//modal
+import ExcelConfirmModal from "./excelConfirmModal.jsx";
+
+import FloatingButton from "../../utils/floatingACtionSave.jsx";
 import {convertTOAMPM,formatDate } from "../../utils/formatDate.js";
+import {exportToExcel} from "../../utils/exportToExcel.js";
+
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
-
-import {exportToExcel} from "./exportToExcel.js";
 
 const AttendanceTable = () => {
   const [dateRange, setDateRange] = useState([null, null]);
@@ -34,6 +37,8 @@ const AttendanceTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [filteredData, setFilteredData] = useState([]); // Initially empty array
+
+  const [openModal, setOpenModal] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -168,9 +173,9 @@ const AttendanceTable = () => {
               <TableRow key={index}>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.section}</TableCell>
-                <TableCell>{formatDate(row.log_date)}</TableCell>
-                <TableCell>{convertTOAMPM(row.time_in)}</TableCell>
-                <TableCell>{convertTOAMPM(row.time_out)}</TableCell>
+                <TableCell>{row.log_date === null ?  '': formatDate(row.log_date)}</TableCell>
+                <TableCell>{row.time_in === null ?  '': convertTOAMPM(row.time_in)}</TableCell>
+                <TableCell>{row.time_out === null ?  '': convertTOAMPM(row.time_out)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -185,8 +190,21 @@ const AttendanceTable = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-      <FloatingButton onClick={() => exportToExcel(filteredData)} />
-
+      <FloatingButton onClick={()=> setOpenModal(true)} />
+      {/* Excel Confirm Modal */}
+      {openModal && (
+            <ExcelConfirmModal
+            open={openModal}
+            setOpen={setOpenModal}
+            onClose={() => setOpenModal(false)}
+            actionText="Confirm"
+            onConfirm={() => {
+              exportToExcel(filteredData);
+              setOpenModal(false);
+            }}
+            color="primary"
+          />
+        )}
     </div>
   );
 };

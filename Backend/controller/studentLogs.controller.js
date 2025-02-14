@@ -1,5 +1,10 @@
-import { getStudentData, getLastLog, timeInStudent, timeOutStudent, getALlStudentLogs_model } from '../model/studentLogs.model.js';
 import AppError from '../utils/AppError.js';
+import {sendTimeInNotification, sendTimeOutNotification} from '../nodemailer/send.email.js'
+import { getStudentData, 
+    getLastLog, timeInStudent, 
+    timeOutStudent, 
+    getALlStudentLogs_model, 
+    studetLogsbystudentId_model } from '../model/studentLogs.model.js';
 
 export const handleStudentLogs = async (req, res) => {
     const { user_id, log_date, time } = req.body;
@@ -15,14 +20,16 @@ export const handleStudentLogs = async (req, res) => {
             throw new AppError("Student not found.", 404);
         }
 
-        const { rfid_tag, section, name } = student;
+        const { rfid_tag, section, parent_email, name } = student;
 
         // ✅ Get the last log for this student
         const lastLog = await getLastLog(user_id, log_date);
         
         if (!lastLog) {
             // No record for today, proceed with time-in
+
             const result = await timeInStudent(user_id, rfid_tag, name, section, log_date, time);
+            await sendTimeInNotification(parent_email, name, log_date, time);
             return res.status(200).json(result);
         }
         
@@ -51,6 +58,7 @@ export const handleStudentLogs = async (req, res) => {
         // ✅ If only time_in exists but no time_out, proceed with time-out
         if (!time_out) {
             const result = await timeOutStudent(log_id, time);
+            await sendTimeOutNotification(parent_email, name, log_date, time);
             return res.status(200).json(result);
         }
 
@@ -85,3 +93,14 @@ export const getallStudetLogs = async (req, res) => {
         throw new AppError("Failed to fetch student logs.", 500);
     }
 }
+
+export const getStudentLogsByStudentId = async (req, res) => {
+    const user_id = req.userId;
+    try {
+        const result = await studetLogsbystudentId_model(user_id);
+        return res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        console.error("Error fetching student logs:", error);
+        throw new AppError("Failed to fetch student logs.", 500);
+    }
+};

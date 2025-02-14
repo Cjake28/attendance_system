@@ -62,30 +62,17 @@ const Navbar = () => {
                 to="/teacher"
                 sx={{ color: isActive("/teacher") ? "yellow" : "white" }}
               >
-                Dashboard
-              </Button>
-              <Button
-                component={Link}
-                to="/teacher/attendance"
-                sx={{ color: isActive("/teacher/attendance") ? "yellow" : "white" }}
-              >
                 View Attendance
               </Button>
             </>
           )}
           {role === "student" && (
             <>
+
               <Button
                 component={Link}
                 to="/student"
                 sx={{ color: isActive("/student") ? "yellow" : "white" }}
-              >
-                Dashboard
-              </Button>
-              <Button
-                component={Link}
-                to="/student/attendance"
-                sx={{ color: isActive("/student/attendance") ? "yellow" : "white" }}
               >
                 My Attendance
               </Button>
