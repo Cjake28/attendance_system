@@ -44,6 +44,8 @@ const Login = () => {
           margin="normal"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="off"
+          
         />
         <TextField
           fullWidth

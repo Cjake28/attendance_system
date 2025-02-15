@@ -9,9 +9,9 @@ const CreateTeacherAdminModal = ({ open, onClose, onConfirm }) => {
       <DialogTitle>Create Teacher/Admin</DialogTitle>
       
       <DialogContent>
-        <TextField fullWidth label="Name" variant="outlined" margin="dense" />
-        <TextField fullWidth label="Username" variant="outlined" margin="dense" />
-        <TextField fullWidth label="Password" type="password" variant="outlined" margin="dense" />
+        <TextField fullWidth label="Name" variant="outlined" margin="dense" autoComplete="off" />
+        <TextField fullWidth label="Username" variant="outlined" margin="dense" autoComplete="off" />
+        <TextField fullWidth label="Password" type="password" variant="outlined" margin="dense" autoComplete="off"/>
         <TextField
           select
           fullWidth
@@ -20,6 +20,7 @@ const CreateTeacherAdminModal = ({ open, onClose, onConfirm }) => {
           onChange={(e) => setRole(e.target.value)}
           variant="outlined"
           margin="dense"
+          autoComplete="off"
         >
           <MenuItem value="teacher">Teacher</MenuItem>
           <MenuItem value="admin">Admin</MenuItem>

@@ -116,6 +116,7 @@ const AttendanceTable = () => {
             onChange={handleFilterChange}
             variant="outlined"
             fullWidth
+            autoComplete="off"
           />
         </div>
         <div style={{ flex: 2 }}>
@@ -127,6 +128,7 @@ const AttendanceTable = () => {
             onChange={handleFilterChange}
             variant="outlined"
             fullWidth
+            autoComplete="off"
           >
             <MenuItem value="">All</MenuItem>
             {students_logs.sections.map((section) => {
@@ -148,11 +150,12 @@ const AttendanceTable = () => {
             scrollableYearDropdown
             yearDropdownItemNumber={100}
             className="custom-datepicker"
+            autoComplete="off"
           />
         </div>
         <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <Button variant="contained" color="primary" sx={{ height: "100%", width: "100%" }} onClick={handleFilter}>
-            Filter
+          <Button variant="contained" color="primary" sx={{ height: "100%", width: "100%", }} onClick={handleFilter}>
+            Search
           </Button>
         </div>
       </div>

@@ -11,9 +11,7 @@ import {
   TableRow,
   Paper,
   TablePagination,
-  TextField,
   Button,
-  MenuItem,
   CircularProgress,
 } from "@mui/material";
 
@@ -124,7 +122,7 @@ export default function StudentPage() {
         </div>
         <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Button variant="contained" color="primary" sx={{ height: "100%", width: "100%" }} onClick={handleFilter}>
-            Filter
+            Search
           </Button>
         </div>
       </div>
