@@ -19,7 +19,7 @@
 	log {
 		format json # Sets access log format to JSON
 	}
-n
+
 	# Health check for Railway
 	rewrite /health /*
 
