@@ -1,0 +1,21 @@
+# Nixpacks configuration file
+
+# Set up some variables to minimize production environment notifications
+[variables]
+    NPM_CONFIG_UPDATE_NOTIFIER = 'false' # Disables npm update notifications in production
+    NPM_CONFIG_FUND = 'false' # Disables npm fund notifications in production
+
+# Download Caddy from Nix
+[phases.caddy]
+    dependsOn = ['setup'] # Runs after the default 'setup' phase
+    nixpkgsArchive = 'ba913eda2df8eb72147259189d55932012df6301' # Caddy v2.8.4 archive
+    nixPkgs = ['caddy'] # Installs Caddy as a Nix package
+
+# Format the Caddyfile with `caddy fmt`
+[phases.fmt]
+    dependsOn = ['caddy'] # Runs after 'caddy' phase to ensure Caddy is installed
+    cmds = ['caddy fmt --overwrite Caddyfile'] # Formats the Caddyfile
+
+# Start the Caddy web server
+[start]
+    cmd = 'exec caddy run --config Caddyfile --adapter caddyfile 2>&1' # Starts Caddy with the Caddyfile config

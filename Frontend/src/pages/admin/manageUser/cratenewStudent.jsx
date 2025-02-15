@@ -63,12 +63,12 @@ const CreateStudentModal = ({ open, onClose }) => {
       <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
         <DialogTitle>Create Student</DialogTitle>
         <DialogContent>
-          <TextField fullWidth label="Name" name="name" variant="outlined" margin="dense" value={formData.name} onChange={handleChange} />
-          <TextField fullWidth label="Username" name="username" variant="outlined" margin="dense" value={formData.username} onChange={handleChange} />
-          <TextField fullWidth label="Password" name="password" type="password" variant="outlined" margin="dense" value={formData.password} onChange={handleChange} />
-          <TextField fullWidth label="Section" name="section" variant="outlined" margin="dense" value={formData.section} onChange={handleChange} />
-          <TextField fullWidth label="Parent Email" name="parent_email" type="email" variant="outlined" margin="dense" value={formData.parent_email} onChange={handleChange} />
-          <TextField fullWidth label="RFID Tag" name="rfid_tag" variant="outlined" margin="dense" value={formData.rfid_tag} onChange={handleChange} />
+          <TextField fullWidth label="Name" name="name" variant="outlined" margin="dense" autoComplete="off"  value={formData.name} onChange={handleChange} />
+          <TextField fullWidth label="Username" name="username" variant="outlined" margin="dense" autoComplete="off" value={formData.username} onChange={handleChange} />
+          <TextField fullWidth label="Password" name="password" type="password" variant="outlined" autoComplete="off" margin="dense" value={formData.password} onChange={handleChange} />
+          <TextField fullWidth label="Section" name="section" variant="outlined" margin="dense" autoComplete="off" value={formData.section} onChange={handleChange} />
+          <TextField fullWidth label="Parent Email" name="parent_email" type="email" variant="outlined" autoComplete="off" margin="dense" value={formData.parent_email} onChange={handleChange} />
+          <TextField fullWidth label="RFID Tag" name="rfid_tag" variant="outlined" margin="dense"  autoComplete="off" value={formData.rfid_tag} onChange={handleChange} />
 
           {formData.images.length > 0 && (
             <div style={{ display: "flex", gap: 8, overflowX: "auto", marginTop: 10 }}>
