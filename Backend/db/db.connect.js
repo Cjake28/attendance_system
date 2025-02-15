@@ -12,11 +12,7 @@ const db = mysql.createPool({
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
-    port: process.env.DB_PORT || 3306,
-    timezone: 'Asia/Manila',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
+    port: process.env.DB_PORT,
 }).promise();
 
 export default db;
