@@ -7,7 +7,6 @@ import {checkAuth_VerifyToken} from '../middleware/checkAUthVerifytoken.js'
 const authRoutes = express.Router();
 
 authRoutes.post("/auth/signin",signin);
-
 authRoutes.get("/auth/check-auth", checkAuth_VerifyToken, checkAuth);
 authRoutes.post("/auth/signout", verifyToken, signout);
 

@@ -21,11 +21,6 @@ const Login = () => {
       await login(email, password); // Call login function
       // console.log("Logged in user:", user);
       navigate("/"); // Redirect to home page
-      // Redirect based on user role
-      // if (user?.role === "admin") navigate("/admin");
-      // else if (user?.role === "teacher") navigate("/teacher");
-      // else if (user?.role === "student") navigate("/student");
-      // else setError("Invalid role assigned.");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Please try again.");
     }

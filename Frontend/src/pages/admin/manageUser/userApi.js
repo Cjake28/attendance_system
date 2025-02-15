@@ -41,6 +41,16 @@ export const createStudentAPI = async (formData) => {
   return response.data;
 };
 
+export const createAdminOrTeacher = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/create-admin-teacher`, formData);
+    console.log("🚀 ~ file: userApi.js ~ line 39 ~ createAdminOrTeacher ~ response", response)
+    return response.data;
+  } catch (error) {
+    console.log("🚀 ~ file: userApi.js ~ line 42 ~ createAdminOrTeacher ~ error", error)
+  }
+};
+
 export const unverifyUser = async (user_id) => {
   try {
     const response = await axios.put(`${API_URL}/api/unverify-user/${user_id}`);
