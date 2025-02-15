@@ -13,7 +13,7 @@ dotenv.config();
 
 export const app = express();
 
-const allowedOrigins = ['http://localhost:5attendeasyai.up.railway.app173', 'http://localhost:5174', 'https://attendeasyai.up.railway.app'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://attendeasyai.up.railway.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
