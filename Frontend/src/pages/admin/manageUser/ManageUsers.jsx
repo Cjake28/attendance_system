@@ -160,7 +160,6 @@ const ManageUsers = () => {
           open={true}
           onClose={() => setOpenModal(null)}
           title="Create Teacher/Admin"
-          onConfirm={() => console.log("Teacher/Admin Created")}
         />
       )}
 

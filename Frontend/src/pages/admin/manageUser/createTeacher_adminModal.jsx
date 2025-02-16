@@ -2,9 +2,11 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, M
 import { useState } from "react";
 import { createAdminOrTeacher } from "./userApi.js";
 import { useSnackbar } from "../../../context/SnackbarContext.jsx"; // Import the custom hook
+import { useQueryClient } from "@tanstack/react-query";
 
-const CreateTeacherAdminModal = ({ open, onClose, onConfirm }) => {
+const CreateTeacherAdminModal = ({ open, onClose }) => {
   const showSnackbar = useSnackbar(); // Access the global Snackbar function
+  const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +27,17 @@ const CreateTeacherAdminModal = ({ open, onClose, onConfirm }) => {
     try {
       const response = await createAdminOrTeacher(formData);
       if (response?.success) {
-        onConfirm(); // Refresh the UI or notify success
+        console.log(formData);
+        const farmattedData = {
+          is_verified: 1,
+          parent_email: null,
+          rfid_tag: null,
+          section: null
+        }
+        const newuser = {user_id: response.user_id, ...formData, ...farmattedData};
+        console.log("User created successfully!", response);
+        queryClient.setQueryData(["users"], (oldUsers) => 
+        [...oldUsers, newuser ]); // Update the cache
         onClose(); // Close the modal
         showSnackbar(`Created successful!`, "success"); // Show success alert
       } else {
