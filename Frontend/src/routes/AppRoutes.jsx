@@ -62,8 +62,8 @@ const router = createBrowserRouter([
         path: "admin",
         element: <RoleBasedProtection userRole="admin" />,
         children: [
-          { index: true, element: <Dashboard /> }, // Fixed index
-          { path: "manage-users", element: <ManageUsers /> }, // Fixed path
+          // { index: true, element: <Dashboard /> }, // Fixed index
+          { index: true, element: <ManageUsers /> }, // Fixed path
           {path: "attendance", element: <AttendacePage/>}
         ],
       },

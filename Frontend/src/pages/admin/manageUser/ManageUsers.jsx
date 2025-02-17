@@ -101,11 +101,17 @@ const ManageUsers = () => {
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
+                  {filter !== "verified" && (
                   <Button variant="contained" color="primary" size="small"
-                    onClick={() => handleVerifyUser(user.user_id)}
+                    onClick={
+                      filter === "verified" ? 
+                      () => console.log("Edit")
+                      :
+                      () => handleVerifyUser(user.user_id) 
+                    }
                     >
                     { filter === 'verified' ? 'Edit' : 'Verify' }
-                  </Button>
+                  </Button>)}
                   <Button 
                     variant="contained" 
                     color="error" 

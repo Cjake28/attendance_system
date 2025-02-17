@@ -32,17 +32,17 @@ const Navbar = () => {
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
           {role === "admin" && (
             <>
-              <Button
+              {/* <Button
                 component={Link}
                 to="/admin"
                 sx={{ color: isActive("/admin") ? "yellow" : "white" }}
               >
                 Dashboard
-              </Button>
+              </Button> */}
               <Button
                 component={Link}
-                to="/admin/manage-users"
-                sx={{ color: isActive("/admin/manage-users") ? "yellow" : "white" }}
+                to="/admin"
+                sx={{ color: isActive("/admin") ? "yellow" : "white" }}
               >
                 Manage Users
               </Button>

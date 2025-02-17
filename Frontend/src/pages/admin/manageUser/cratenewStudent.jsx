@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, CircularProgress, Backdrop } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import CaptureImageModal from "./captureImageModal.jsx";
-import { createStudentAPI } from "./userApi.js"; // Import your API function
+import { createStudentAPI } from "./userApi.js";
 
 const CreateStudentModal = ({ open, onClose }) => {
-
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -17,6 +16,7 @@ const CreateStudentModal = ({ open, onClose }) => {
     images: [],
   });
 
+  const [errors, setErrors] = useState({});
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,12 +28,24 @@ const CreateStudentModal = ({ open, onClose }) => {
     setFormData({ ...formData, images: capturedImages });
   };
 
-  // React Query Mutation
+  const validateForm = () => {
+    let newErrors = {};
+    Object.keys(formData).forEach((key) => {
+      if (key !== "images" && formData[key].trim() === "") {
+        newErrors[key] = "This field is required";
+      }
+    });
+    if (formData.images.length < 5) {
+      newErrors["images"] = "You must capture at least 5 images";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const mutation = useMutation({
     mutationFn: async () => {
       setIsLoading(true);
-      if (formData.images.length < 5) throw new Error("You must capture 5 images before uploading.");
-      return createStudentAPI(formData); // Use API function
+      return createStudentAPI(formData);
     },
     onSuccess: () => {
       alert("Student created successfully!");
@@ -51,24 +63,41 @@ const CreateStudentModal = ({ open, onClose }) => {
     },
     onError: (error) => {
       alert(error.message);
-
     },
     onSettled: () => {
       setIsLoading(false);
     }
   });
 
+  const handleSubmit = () => {
+    if (validateForm()) {
+      mutation.mutate();
+    }
+  };
+
   return (
     <>
       <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
         <DialogTitle>Create Student</DialogTitle>
         <DialogContent>
-          <TextField fullWidth label="Name" name="name" variant="outlined" margin="dense" autoComplete="off"  value={formData.name} onChange={handleChange} />
-          <TextField fullWidth label="Username" name="username" variant="outlined" margin="dense" autoComplete="off" value={formData.username} onChange={handleChange} />
-          <TextField fullWidth label="Password" name="password" type="password" variant="outlined" autoComplete="off" margin="dense" value={formData.password} onChange={handleChange} />
-          <TextField fullWidth label="Section" name="section" variant="outlined" margin="dense" autoComplete="off" value={formData.section} onChange={handleChange} />
-          <TextField fullWidth label="Parent Email" name="parent_email" type="email" variant="outlined" autoComplete="off" margin="dense" value={formData.parent_email} onChange={handleChange} />
-          <TextField fullWidth label="RFID Tag" name="rfid_tag" variant="outlined" margin="dense"  autoComplete="off" value={formData.rfid_tag} onChange={handleChange} />
+          {Object.entries(formData).map(([key, value]) => (
+            key !== "images" &&  key !== "role" && (
+              <TextField
+                key={key}
+                fullWidth
+                label={key.replace("_", " ").toUpperCase()}
+                name={key}
+                variant="outlined"
+                margin="dense"
+                autoComplete="off"
+                type={key === "password" ? "password" : "text"}
+                value={value}
+                onChange={handleChange}
+                error={!!errors[key]}
+                helperText={errors[key]}
+              />
+            )
+          ))}
 
           {formData.images.length > 0 && (
             <div style={{ display: "flex", gap: 8, overflowX: "auto", marginTop: 10 }}>
@@ -77,6 +106,7 @@ const CreateStudentModal = ({ open, onClose }) => {
               ))}
             </div>
           )}
+          {errors.images && <p style={{ color: "red" }}>{errors.images}</p>}
 
           <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={() => setOpenCaptureModal(true)}>
             Capture Image
@@ -87,7 +117,7 @@ const CreateStudentModal = ({ open, onClose }) => {
           <Button onClick={onClose} color="secondary" disabled={mutation.isLoading}>
             Cancel
           </Button>
-          <Button onClick={() => mutation.mutate()} color="primary" disabled={mutation.isLoading || formData.images.length < 5}>
+          <Button onClick={handleSubmit} color="primary" disabled={mutation.isLoading}>
             {isLoading ? <CircularProgress size={24} /> : "Create"}
           </Button>
         </DialogActions>
@@ -95,7 +125,6 @@ const CreateStudentModal = ({ open, onClose }) => {
 
       <CaptureImageModal open={openCaptureModal} onClose={() => setOpenCaptureModal(false)} onCapture={handleCaptureImages} />
 
-      {/* Loading Overlay */}
       <Backdrop open={isLoading} sx={{ color: "#fff", zIndex: 1201}}>
         <CircularProgress color="inherit" />
       </Backdrop>
