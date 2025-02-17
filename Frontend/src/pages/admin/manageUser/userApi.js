@@ -34,7 +34,7 @@ export const createStudentAPI = async (formData) => {
     formPayload.append("images", blob, `image${index + 1}.jpg`);
   });
 
-  const response = await axios.post("http://localhost:8765/api/create-student", formPayload, {
+  const response = await axios.post(`${API_URL}/api/create-student`, formPayload, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
