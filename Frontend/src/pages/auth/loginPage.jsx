@@ -34,7 +34,7 @@ const Login = () => {
         </Typography>
         <TextField
           fullWidth
-          label="Email"
+          label="Username"
           variant="outlined"
           margin="normal"
           value={email}
