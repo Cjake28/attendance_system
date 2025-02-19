@@ -48,7 +48,7 @@ export const timeInStudent = async (user_id, rfid_tag, name, section, log_date, 
 
     try {
         await db.execute(query, [user_id, rfid_tag, name, section, log_date, time]);
-        return { success: true, status: "time_in", message: "Student successfully timed in." };
+        return { success: true, status: "Checked In Successfully", message: "Student successfully timed in." };
     } catch (error) {
         console.error("❌ Database Error:", error.message);
         throw new AppError("Failed to create timeInStudent data.", 500);
@@ -65,7 +65,7 @@ export const timeOutStudent = async (log_id, time) => {
 
     try {
         await db.execute(query, [time, log_id]);
-        return { success: true, status: "time_out", message: "Student successfully timed out." };
+        return { success: true, status: "Checked Out Successfully", message: "Student successfully timed out." };
     } catch (error) {
         console.error("❌ Database Error:", error.message);
         throw new AppError("Failed to create timeOutStudent data.", 500);

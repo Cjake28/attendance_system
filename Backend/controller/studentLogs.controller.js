@@ -5,6 +5,7 @@ import { getStudentData,
     timeOutStudent, 
     getALlStudentLogs_model, 
     studetLogsbystudentId_model } from '../model/studentLogs.model.js';
+import {convertTOAMPM, formatDate} from '../utils/formatDate.js'
 
 export const handleStudentLogs = async (req, res) => {
     const { user_id, log_date, time } = req.body;
@@ -27,9 +28,11 @@ export const handleStudentLogs = async (req, res) => {
         
         if (!lastLog) {
             // No record for today, proceed with time-in
-
-            const result = await timeInStudent(user_id, rfid_tag, name, section, log_date, time);
+            const resp = await timeInStudent(user_id, rfid_tag, name, section, log_date, time);
             await sendTimeInNotification(parent_email, name, log_date, time);
+            const timein = convertTOAMPM(time)
+            const logDate = formatDate(log_date)
+            const result = {...resp, name, section, log_date: logDate, time_in: timein}
             return res.status(200).json(result);
         }
         
@@ -37,10 +40,18 @@ export const handleStudentLogs = async (req, res) => {
 
         // ❌ If the student has already timed in and timed out today, block further logs
         if (time_in && time_out) {
-            return res.status(400).json({
+            const timein = convertTOAMPM(time_in)
+            const timeOut= convertTOAMPM(time_out)
+            const logDate = formatDate(log_date)
+            return res.status(200).json({
                 success: false,
                 status: "already_completed",
-                message: "Student has already timed in and out today. Please wait until the next day."
+                message: "Student has already timed in and out today. Please wait until the next day.",
+                name,
+                section, 
+                log_date: logDate,
+                time_in: timein,
+                time_out: timeOut
             });
         }
 
@@ -48,17 +59,25 @@ export const handleStudentLogs = async (req, res) => {
         const time_diff = getTimeDiffInMinutes(time_in, time);
         console.log("Time difference:", time_diff, "minutes");
         if (time_diff < 3) {
+            const timein = convertTOAMPM(time_in)
+            const logDate = formatDate(log_date)
             return res.status(200).json({
-                success: false,
+                success: true,
                 status: "already_timed_in",
-                message: "Please wait before tapping again."
+                message: "Please wait before tapping again.",
+                log_date: logDate,
+                time_in: timein
             });
         }
 
         // ✅ If only time_in exists but no time_out, proceed with time-out
         if (!time_out) {
-            const result = await timeOutStudent(log_id, time);
+            const resp = await timeOutStudent(log_id, time);
+            const timein = convertTOAMPM(time)
+            const timeOut= convertTOAMPM(time_out)
+            const logDate = formatDate(log_date)
             await sendTimeOutNotification(parent_email, name, log_date, time);
+            const result = {...resp, name, section, log_date: logDate, time_in: timein, time_out: timeOut}
             return res.status(200).json(result);
         }
 
