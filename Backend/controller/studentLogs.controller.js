@@ -73,8 +73,8 @@ export const handleStudentLogs = async (req, res) => {
         // ✅ If only time_in exists but no time_out, proceed with time-out
         if (!time_out) {
             const resp = await timeOutStudent(log_id, time);
-            const timein = convertTOAMPM(time)
-            const timeOut= convertTOAMPM(time_out)
+            const timein = convertTOAMPM(time_in)
+            const timeOut= convertTOAMPM(time)
             const logDate = formatDate(log_date)
             await sendTimeOutNotification(parent_email, name, log_date, time);
             const result = {...resp, name, section, log_date: logDate, time_in: timein, time_out: timeOut}
