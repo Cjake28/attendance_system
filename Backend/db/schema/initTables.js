@@ -13,8 +13,8 @@ const initTables = async () => {
     await createStudentTable();
     await createStudent_imageTable();
     await createStudent_logs();
-    // await addColumnToStudentLogs();
-    // await addColumnToStudentLog();
+    await addColumnToStudentLogs();
+    await addColumnToStudentLog();
     console.log("✅ All tables initialized successfully.");
   } catch (error) {
     console.error("❌ Error initializing tables:", error);
