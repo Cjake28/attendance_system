@@ -11,6 +11,7 @@ const createStudent_logs = async () => {
   log_date DATE NOT NULL DEFAULT (CURRENT_DATE),
   time_in TIME DEFAULT NULL,
   time_out TIME DEFAULT NULL,
+  LRN VARCHAR(50) DEFAULT NULL;
   UNIQUE (user_id, log_date)  -- Ensures one log per user per day
   );`;
 
