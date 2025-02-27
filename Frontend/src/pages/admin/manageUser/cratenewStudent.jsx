@@ -13,6 +13,7 @@ const CreateStudentModal = ({ open, onClose }) => {
     role: "student",
     parent_email: "",
     rfid_tag: "",
+    lrn: "",
     images: [],
   });
 
@@ -57,6 +58,7 @@ const CreateStudentModal = ({ open, onClose }) => {
         role: "student",
         parent_email: "",
         rfid_tag: "",
+        lrn: "",
         images: [],
       });
       onClose();

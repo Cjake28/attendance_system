@@ -8,6 +8,7 @@ const createStudentTable = async () => {
     rfid_tag VARCHAR(50) UNIQUE,
     section VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    LRN VARCHAR(50) DEFAULT NULL;
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
   );`
   

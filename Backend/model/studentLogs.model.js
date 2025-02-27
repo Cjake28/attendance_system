@@ -4,7 +4,7 @@ import AppError from '../utils/AppError.js';
 // ✅ Get student details from `students` and `users` tables
 export const getStudentData = async (user_id) => {
     const query = `
-        SELECT s.rfid_tag, s.section, s.parent_email, u.name
+        SELECT s.rfid_tag, s.section, s.parent_email, s.LRN, u.name
         FROM students s
         JOIN users u ON s.user_id = u.user_id
         WHERE s.user_id = ?;
@@ -40,14 +40,14 @@ export const getLastLog = async (user_id, log_date) => {
 };
 
 // ✅ Insert a time-in entry for a student (Fix: Add `time_in` parameter)
-export const timeInStudent = async (user_id, rfid_tag, name, section, log_date, time) => {
+export const timeInStudent = async (user_id, rfid_tag, name, section, log_date, time, LRN) => {
     const query = `
-        INSERT INTO student_logs (user_id, rfid_tag, name, section, log_date, time_in)
-        VALUES (?, ?, ?, ?, ?, ?);
+        INSERT INTO student_logs (user_id, rfid_tag, name, section, log_date, time_in, LRN)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
     `;
 
     try {
-        await db.execute(query, [user_id, rfid_tag, name, section, log_date, time]);
+        await db.execute(query, [user_id, rfid_tag, name, section, log_date, time, LRN]);
         return { success: true, status: "Checked In Successfully", message: "Student successfully timed in." };
     } catch (error) {
         console.error("❌ Database Error:", error.message);

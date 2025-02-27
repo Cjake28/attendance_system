@@ -2,6 +2,8 @@ import createUsersTable from './users.table.js';
 import createStudentTable from './student.tables.js';
 import createStudent_imageTable from './student_image.table.js';
 import createStudent_logs from './studentLogs.table.js'
+import addColumnToStudentLogs from './addColumn.js'
+import addColumnToStudentLog from './addColumnstudentLogs.js'
 
 const initTables = async () => {
   try {
@@ -11,7 +13,8 @@ const initTables = async () => {
     await createStudentTable();
     await createStudent_imageTable();
     await createStudent_logs();
-    
+    // await addColumnToStudentLogs();
+    // await addColumnToStudentLog();
     console.log("✅ All tables initialized successfully.");
   } catch (error) {
     console.error("❌ Error initializing tables:", error);

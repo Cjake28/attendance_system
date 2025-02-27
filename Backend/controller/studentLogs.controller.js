@@ -21,14 +21,14 @@ export const handleStudentLogs = async (req, res) => {
             throw new AppError("Student not found.", 404);
         }
 
-        const { rfid_tag, section, parent_email, name } = student;
+        const { rfid_tag, section, parent_email, LRN, name } = student;
 
         // ✅ Get the last log for this student
         const lastLog = await getLastLog(user_id, log_date);
         
         if (!lastLog) {
             // No record for today, proceed with time-in
-            const resp = await timeInStudent(user_id, rfid_tag, name, section, log_date, time);
+            const resp = await timeInStudent(user_id, rfid_tag, name, section, log_date, time, LRN);
             await sendTimeInNotification(parent_email, name, log_date, time);
             const timein = convertTOAMPM(time)
             const logDate = formatDate(log_date)
@@ -105,7 +105,7 @@ export const getallStudetLogs = async (req, res) => {
     try {
         const result = await getALlStudentLogs_model();
         const setdata = new Set(result.map((item) => item.section));
-        
+        console.log('allstudentLog: ', result)
         return res.status(200).json({ success: true, data: result, sections: [...setdata] });
     } catch (error) {
         console.error("Error fetching student logs:", error);

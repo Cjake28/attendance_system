@@ -19,13 +19,13 @@ export const createStudentUsr = async (name, username, password, role) => {
     }
 };
 
-export const createStudentData = async (user_id, parent_email, rfid_tag) => {
+export const createStudentData = async (user_id, parent_email, rfid_tag, normalizeSection, lrn) => {
     const query = `
-        INSERT INTO students (user_id, parent_email, rfid_tag)
-        VALUES (?, ?, ?);
+        INSERT INTO students (user_id, parent_email, rfid_tag, section, LRN)
+        VALUES (?, ?, ?, ?, ?);
     `;
 
-    const values = [user_id, parent_email, rfid_tag];
+    const values = [user_id, parent_email, rfid_tag, normalizeSection, lrn];
 
     try {
         await db.execute(query, values);

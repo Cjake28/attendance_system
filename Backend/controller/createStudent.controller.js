@@ -11,10 +11,10 @@ import {
 } from '../model/createStudent.model.js';
 
 export const createStudent = async (req, res) => {
-    const { name, username, password, section, role='student', parent_email, rfid_tag } = req.body;
+    const { name, username, password, section, role='student', parent_email, rfid_tag, lrn } = req.body;
     const images = req.files; // Multer will provide the images here
 
-    if (!name || !username || !password || !section  || !parent_email || !rfid_tag || images.length === 0) {
+    if (!name || !username || !password || !section  || !parent_email || !rfid_tag || !lrn || images.length === 0) {
         throw new AppError("All fields and at least one image are required", 400);
     }
 
@@ -37,7 +37,7 @@ export const createStudent = async (req, res) => {
     const user_id = await createStudentUsr(normalizedName, normalizedUsername, hashedPassword, role);
 
     // Create student data
-    await createStudentData(user_id, parent_email, rfid_tag, normalizeSection);
+    await createStudentData(user_id, parent_email, rfid_tag, normalizeSection, lrn);
 
     // Store multiple face images
     for (const image of images) {

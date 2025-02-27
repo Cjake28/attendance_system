@@ -166,6 +166,7 @@ const AttendanceTable = () => {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Section</TableCell>
+              <TableCell>LRN</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Time In</TableCell>
               <TableCell>Time Out</TableCell>
@@ -176,6 +177,7 @@ const AttendanceTable = () => {
               <TableRow key={index}>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.section}</TableCell>
+                <TableCell>{row.LRN}</TableCell>
                 <TableCell>{row.log_date === null ?  '': formatDate(row.log_date)}</TableCell>
                 <TableCell>{row.time_in === null ?  '': convertTOAMPM(row.time_in)}</TableCell>
                 <TableCell>{row.time_out === null ?  '': convertTOAMPM(row.time_out)}</TableCell>
