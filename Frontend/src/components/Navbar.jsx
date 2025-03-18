@@ -81,7 +81,7 @@ const Navbar = () => {
         </Box>
 
         {/* Right side: Logout Button */}
-        <Button onClick={handleLogout} sx={{ color: "white", marginLeft: "auto", marginRight: 1 }}>
+        <Button onClick={handleLogout} sx={{ color: "white", marginLeft: "auto" }}>
           Logout
         </Button>
       </Toolbar>
