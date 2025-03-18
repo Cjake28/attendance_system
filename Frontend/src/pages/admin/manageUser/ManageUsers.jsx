@@ -84,7 +84,7 @@ const ManageUsers = () => {
       />
 
       {/* Scrollable Table */}
-      <TableContainer component={Paper} sx={{ maxHeight: 400, overflow: "auto" }}>
+      <TableContainer component={Paper} sx={{ maxHeight: "55vh", overflow: "auto" }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
