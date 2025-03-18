@@ -45,7 +45,7 @@ export const handleStudentLogs = async (req, res) => {
             const logDate = formatDate(log_date)
             return res.status(200).json({
                 success: false,
-                status: "already_completed",
+                status: "Already completed",
                 message: "Student has already timed in and out today. Please wait until the next day.",
                 name,
                 section, 
@@ -63,7 +63,7 @@ export const handleStudentLogs = async (req, res) => {
             const logDate = formatDate(log_date)
             return res.status(200).json({
                 success: true,
-                status: "already_timed_in",
+                status: "Already timed in",
                 message: "Please wait before tapping again.",
                 log_date: logDate,
                 time_in: timein

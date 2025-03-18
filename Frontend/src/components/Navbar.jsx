@@ -51,7 +51,7 @@ const Navbar = () => {
                 to="/admin/attendance"
                 sx={{ color: isActive("/admin/attendance") ? "yellow" : "white" }}
               >
-                Attendace
+                Attendance
               </Button>
             </>
           )}
@@ -81,7 +81,7 @@ const Navbar = () => {
         </Box>
 
         {/* Right side: Logout Button */}
-        <Button onClick={handleLogout} sx={{ color: "white", marginLeft: "auto" }}>
+        <Button onClick={handleLogout} sx={{ color: "white", marginLeft: "auto", marginRight: 1 }}>
           Logout
         </Button>
       </Toolbar>
