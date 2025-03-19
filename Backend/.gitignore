@@ -1,6 +1,6 @@
 .env
 bcrypt.js
-
+testEmail.js
 # dependencies
 /node_modules
 /.pnp

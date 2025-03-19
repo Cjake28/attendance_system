@@ -16,7 +16,7 @@ export const TIME_IN_NOTIFICATION_TEMPLATE = `
     <p><strong>Date:</strong> {date}</p>
     <p><strong>Time In:</strong> {timeIn}</p>
     <p>If you have any concerns, please contact the school administration.</p>
-    <p>Best regards,<br>Your School Name</p>
+    <p>Best regards,<br>Dr. Felipe De Jesus National High School</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply.</p>
@@ -43,7 +43,7 @@ export const TIME_OUT_NOTIFICATION_TEMPLATE = `
     <p><strong>Date:</strong> {date}</p>
     <p><strong>Time Out:</strong> {timeOut}</p>
     <p>Please ensure your child arrives home safely.</p>
-    <p>Best regards,<br>Your School Name</p>
+    <p>Best regards,<br>Dr. Felipe De Jesus National High School</p>
   </div>
   <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
     <p>This is an automated message, please do not reply.</p>

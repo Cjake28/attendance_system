@@ -21,9 +21,11 @@ import {
 //modal
 import ExcelConfirmModal from "./excelConfirmModal.jsx";
 
+//utils
 import FloatingButton from "../../utils/floatingACtionSave.jsx";
 import {convertTOAMPM,formatDate } from "../../utils/formatDate.js";
 import {exportToExcel} from "../../utils/exportToExcel.js";
+import {formatName} from "../../utils/formatName.js"
 
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -175,7 +177,7 @@ const AttendanceTable = () => {
           <TableBody>
             {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
               <TableRow key={index}>
-                <TableCell>{row.name}</TableCell>
+                <TableCell>{formatName(row.name)}</TableCell>
                 <TableCell>{row.section}</TableCell>
                 <TableCell>{row.LRN}</TableCell>
                 <TableCell>{row.log_date === null ?  '': formatDate(row.log_date)}</TableCell>

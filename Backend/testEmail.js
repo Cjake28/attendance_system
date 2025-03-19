@@ -2,7 +2,7 @@ import { sendTimeInNotification } from './nodemailer/send.email.js';
 
 async function testEmail() {
     try {
-        const email = "cjakesupnet@gmail.com"; // Replace with your test email
+        const email = "supnetcjs@gmail.com"; // Replace with your test email
         const studentName = "John Doe";
         const date = new Date();
         const time = "14:30"; // Example 24-hour format time

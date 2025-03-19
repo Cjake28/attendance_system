@@ -1,18 +1,33 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchUsers, unverifyUser, deleteUser, verifyUser } from "./userApi.js";
 
-import { 
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, 
-  Button, ButtonGroup, TextField, CircularProgress, SpeedDial, SpeedDialAction 
-} from "@mui/material";
-import { useState } from "react";
 import CreateStudentModal from "./cratenewStudent.jsx";
+import CreateTeacherAdminModal from "./createTeacher_adminModal.jsx";
+import ConfirmActionModal from "./confirmActionModal.jsx";
+
+import {formatName} from '../../../utils/formatName.js'
+
 import AddIcon from "@mui/icons-material/Add";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SchoolIcon from "@mui/icons-material/School";
-import CreateTeacherAdminModal from "./createTeacher_adminModal.jsx";
-import ConfirmActionModal from "./confirmActionModal.jsx";
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead, 
+  TableRow, 
+  Paper, 
+  Button, 
+  ButtonGroup, 
+  TextField, 
+  CircularProgress, 
+  SpeedDial, 
+  SpeedDialAction 
+} from "@mui/material";
+
 
 const ManageUsers = () => {
   const [filter, setFilter] = useState("verified"); // "all", "verified", "unverified"
@@ -97,8 +112,8 @@ const ManageUsers = () => {
           <TableBody>
             {filteredUsers.map(user => (
               <TableRow key={user.user_id}>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.username}</TableCell>
+                <TableCell>{formatName(user.name)}</TableCell>
+                <TableCell>{formatName(user.username)}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
                   {filter !== "verified" && (
