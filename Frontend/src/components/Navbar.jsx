@@ -26,7 +26,7 @@ const Navbar = () => {
     <AppBar position="static" sx={{ backgroundColor: "#121212" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         {/* Left side: Logo/Title */}
-        <Typography variant="h6">Attendance System</Typography>
+        <Typography variant="h6">ATTENDANCE SYSTEM</Typography>
 
         {/* Centered Navigation */}
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
