@@ -111,37 +111,39 @@ const ManageUsers = () => {
           </TableHead>
           <TableBody>
             {filteredUsers.map(user => (
-              <TableRow key={user.user_id}>
-                <TableCell>{formatName(user.name)}</TableCell>
-                <TableCell>{formatName(user.username)}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>
-                  {filter !== "verified" && (
-                  <Button variant="contained" color="primary" size="small"
-                    onClick={
-                      filter === "verified" ? 
-                      () => console.log("Edit")
-                      :
-                      () => handleVerifyUser(user.user_id) 
-                    }
+              user.role !== 'admin' && (
+                <TableRow key={user.user_id}>
+                  <TableCell>{formatName(user.name)}</TableCell>
+                  <TableCell>{formatName(user.username)}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    {filter !== "verified" && (
+                    <Button variant="contained" color="primary" size="small"
+                      onClick={
+                        filter === "verified" ? 
+                        () => console.log("Edit")
+                        :
+                        () => handleVerifyUser(user.user_id) 
+                      }
+                      >
+                      { filter === 'verified' ? 'Edit' : 'Verify' }
+                    </Button>)}
+                    <Button 
+                      variant="contained" 
+                      color="error" 
+                      size="small" 
+                      sx={{ ml: 1 }}
+                      onClick={ 
+                        filter === 'verified' ? 
+                        () => handleUnverifyUser(user.user_id) 
+                        : 
+                        () => handleDeleteUser(user.user_id)}
                     >
-                    { filter === 'verified' ? 'Edit' : 'Verify' }
-                  </Button>)}
-                  <Button 
-                    variant="contained" 
-                    color="error" 
-                    size="small" 
-                    sx={{ ml: 1 }}
-                    onClick={ 
-                      filter === 'verified' ? 
-                      () => handleUnverifyUser(user.user_id) 
-                      : 
-                      () => handleDeleteUser(user.user_id)}
-                  >
-                    {filter === 'verified' ? 'unverify':'Delete'}
-                  </Button>
-                </TableCell>
-              </TableRow>
+                      {filter === 'verified' ? 'unverify':'Delete'}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )
             ))}
           </TableBody>
         </Table>
