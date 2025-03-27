@@ -68,6 +68,7 @@ export const handleStudentLogs = async (req, res) => {
                 log_date: logDate,
                 time_in: timein
             });
+            
         }
 
         // ✅ If only time_in exists but no time_out, proceed with time-out
